@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Nike oulet snikers</title>
+
+  </head>
+  <body>
+    <header>
+      <h1><img id="img" src="./img/nos-transformed (1).png" alt=""></h1>
+      <p> Tienda de zapatillas importadas</p>
+    </header>
+    <main>
+      <section class="productos">
+        <h2>Zapatillas disponibles</h2>
+        <ul>
+          <li>
+            <img id=img src="./img/zapatillas-nike-air-max-systm-gris-510010dm9537002-1.jpg" alt="Zapatilla 1">
+            <h3>Nike Air Max SYSTM GRIS</h3>
+            <p>Air Max SYSTM recupera todo lo que te encanta de tus vibraciones favoritas de los 80.
+                La amortiguación NIKE Air visible y probada se combina con una parte superior elegante de inspiración deportiva.
+                Diseñado originalmente para carreras de alto rendimiento, la amortiguación Max Air brinda una comodidad comprobada.
+                Inspirándose en todos tus modelos Air Max favoritos de los años 80, obtenés una estética tradicional con un toque moderno.
+                La parte superior de material mixto brinda durabilidad y transpirabilidad, mientras que la suela exterior de goma agrega tracción duradera.
+                Debido a la naturaleza de exclusiva calidad de los materiales, podría ocurrir que en algunos casos el producto destiñera levemente, sobre todo en condiciones de humedad.
+                Mientras esté mojada se aconseja que la zapatilla no entre en contacto con otras prendas claras hasta que no esté completamente seca.</p>
+                <p> U$S 200</p>
+                <button onclick="agregarAlCarrito('Nike Air Max SYSTM GRIS', 200)">Agregar al carrito</button>
+          </li>
+          </li>
+          <li>
+            <img id=img src="./img/NI_DA1923-001-1.jpg" alt="Zapatilla 2">
+            <h3> Nike Air Max 2021</h3>
+            <p>Las Zapatillas Nike Air Max 2021 brindan soporte y estabilidad a tus pisadas, para que disfrutes a pleno de cada carrera y mejores tu rendimiento en cada entrenamiento. La capellada de tela y cuero sintético aporta transpirabilidad y es sumamente duradera. La tecnología Air Max ofrece una cámara de aire que cubre desde el talón hasta el medio pie, que amortigua y absorbe el impacto de cada paso que des para que tu andar sea más ligero y confortable.</p>
+            <p>U$S 400</p>
+            <button onclick="agregarAlCarrito('Nike Air Max 2021', 400)">Agregar al carrito</button>
+          </li>
+          <li>
+            <img id=img src="./img/NIDR0501-200-1.jpg" alt="Zapatilla 3">
+            <h3>Air Jordan 1 Mid SE</h3>
+            <p>Es un modelo que pese a su fabricación en cuero cuenta con diferentes abertiras a lo largo de todo el upper que ofrecen buena transpirabilidad. Su media suela esconde un secreto, la capsula de amortiguación Air para ofrecerte un plus de comodidad en tu outfit urbano o si decides ponerte a jugar a basket con ellas.</p>
+            <p> U$S 350</p>
+            <button onclick="agregarAlCarrito('Air Jordan 1 Mid SE', 350)">Agregar al carrito</button>
+          </li>
+        </ul>
+      </section>
+      <aside class="carrito">
+        <h2>Carrito de compras</h2>
+        <ul id="carrito-lista">
+          <li>No hay productos en el carrito</li>
+        </ul>
+        <p>Total: $0</p>
+        <button onclick="vaciarCarrito()">Vaciar carrito</button>
+        <button onclick="realizarCompra()">Realizar compra</button>
+      </aside>
+    </main>
+    <footer>
+      <p>Derechos de autor © 2023 Tienda de zapatillas.</p>
+    </footer>
+    <script src="main.js"></script>
+</html>
+
+    
