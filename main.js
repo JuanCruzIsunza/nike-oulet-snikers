@@ -1,66 +1,96 @@
+// Variables globales
 let carrito = [];
-let total = 0;
-
 const productos = [
-  { nombre: 'Nike Air Max SYSTM GRIS', precio: 200 },
-  { nombre: 'Nike Air Max 2021', precio: 400 },
-  { nombre: 'Air Jordan 1 Mid SE', precio: 350 },
- 
-
+  {
+    nombre: "Nike Air Max SYSTM GRIS",
+    precio: 200,
+  },
+  {
+    nombre: "Nike Air Max 2021",
+    precio: 400,
+  },
+  {
+    nombre: "Air Jordan 1 Mid SE",
+    precio: 350,
+  },
 ];
 
+// Funciones para manejar el carrito de compras
 function agregarAlCarrito(nombre, precio) {
-  carrito.push({ nombre, precio });
-  total += precio;
+  const producto = {
+    nombre: nombre,
+    precio: precio,
+  };
+  carrito.push(producto);
   actualizarCarrito();
 }
 
 function actualizarCarrito() {
-  const carritoLista = document.getElementById('carrito-lista');
-  carritoLista.innerHTML = '';
-  carrito.forEach(producto => {
-    const li = document.createElement('li');
-    li.textContent = `${producto.nombre} - $${producto.precio}`;
-    carritoLista.appendChild(li);
+  const carritoLista = document.getElementById("carrito-lista");
+  carritoLista.innerHTML = "";
+  let total = 0;
+  carrito.forEach((producto) => {
+    const productoLista = document.createElement("li");
+    productoLista.innerText = `${producto.nombre} - U$S ${producto.precio}`;
+    carritoLista.appendChild(productoLista);
+    total += producto.precio;
   });
-  document.getElementById('carrito-total').textContent = `Total: $${total}`;
+  const totalElemento = document.createElement("p");
+  totalElemento.innerText = `Total: U$S ${total}`;
+  carritoLista.appendChild(totalElemento);
 }
 
 function vaciarCarrito() {
   carrito = [];
-  total = 0;
   actualizarCarrito();
 }
 
 function realizarCompra() {
-  if (carrito.length > 0) {
-    alert(`Compra realizada por un total de $${total}`);
-    vaciarCarrito();
+  const nombre = document.getElementById("cliente-nombre").value;
+  const email = document.getElementById("cliente-email").value;
+  const direccion = document.getElementById("cliente-direccion").value;
+  if (carrito.length === 0 || nombre === "" || email === "" || direccion === "") {
+    alert("Debe completar todos los campos y agregar productos al carrito para realizar la compra");
   } else {
-    alert('No hay productos en el carrito');
+    alert(`¡Gracias por tu compra, ${nombre}! Te enviamos un email a ${email} con la información de tu compra.`);
+    vaciarCarrito();
+    document.getElementById("cliente-nombre").value = "";
+    document.getElementById("cliente-email").value = "";
+    document.getElementById("cliente-direccion").value = "";
   }
 }
 
-function simularCompra() {
-  let continuar = true;
-  while (continuar) {
-    const seleccion = prompt(`¿Qué producto deseas comprar? (1-${productos.length})\n\n${productos.map((p, i) => `${i+1}. ${p.nombre} - $${p.precio}`).join('\n')}\n\nEscribe "cancelar" para salir`);
-    if (seleccion === 'cancelar') {
-      alert('Compra cancelada');
-      continuar = false;
-    } else {
-      const seleccionNum = parseInt(seleccion);
-      if (!isNaN(seleccionNum) && seleccionNum > 0 && seleccionNum <= productos.length) {
-        const producto = productos[seleccionNum-1];
-        agregarAlCarrito(producto.nombre, producto.precio);
-        const continuarCompra = confirm(`¿Quieres seguir comprando?\n\nTotal de la compra: $${total}`);
-        if (!continuarCompra) {
-          realizarCompra();
-          continuar = false;
-        }
-      } else {
-        alert('Selección inválida');
-      }
-    }
+// Funciones de búsqueda y filtrado
+function buscarProducto(nombre) {
+  return productos.find((producto) => producto.nombre === nombre);
+}
+
+function filtrarPorPrecio(precioMinimo, precioMaximo) {
+  return productos.filter((producto) => producto.precio >= precioMinimo && producto.precio <= precioMaximo);
+}
+// Variables para recopilar la información del cliente
+let nombre = '';
+let apellido = '';
+let correo = '';
+let telefono = '';
+
+// Función para recopilar la información del cliente
+function recopilarInformacion() {
+  // Recopilar la información del formulario HTML
+  nombre = document.getElementById('nombre').value;
+  apellido = document.getElementById('apellido').value;
+  correo = document.getElementById('correo').value;
+  telefono = document.getElementById('telefono').value;
+
+  // Validar que se haya ingresado un valor para cada campo
+  if (nombre === '' || apellido === '' || correo === '' ) {
+    alert('Por favor ingrese todos los campos requeridos.');
+    return false;
   }
+
+  // Mostrar la información recopilada en la consola
+  console.log('Información del cliente:');
+  console.log('Nombre:', nombre);
+  console.log('Apellido:', apellido);
+  console.log('Correo:', correo);
 }

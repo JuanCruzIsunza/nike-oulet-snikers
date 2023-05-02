@@ -1,58 +1,146 @@
-
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
   
+  /* Estilos para el encabezado */
   header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
+    background-color: #e6e6e6;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
-  header h1 {
+  header p {
     margin: 0;
-    font-size: 36px;
   }
   
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav li {
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  nav li a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  main {
+  /* Estilos para la sección de productos */
+  .productos {
     display: flex;
     flex-wrap: wrap;
-   
-  }
-  
-  .productos {
-    flex: 3;
-    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .productos h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    text-align: center;
   }
   
-  .productos ul {
+  .productos li {
     list-style: none;
-    margin: 0
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 30%;
+    min-width: 250px;
   }
- #img {
-  width: 350px;
-
- }
+  
+  .productos li img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+  }
+  
+  .productos li h3 {
+    margin: 0;
+    font-size: 1.2em;
+    text-align: center;
+  }
+  
+  .productos li p {
+    font-size: 0.9em;
+    line-height: 1.2;
+    margin-bottom: 1em;
+  }
+  
+  .productos li p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+  }
+  
+  .productos li button {
+    display: block;
+    margin: 1em auto 0;
+    padding: 0.5em 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .productos li button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Estilos para la sección de información del cliente */
+  form label {
+    display: block;
+    margin-bottom: 0.5em;
+  }
+  
+  form input {
+    padding: 0.5em;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+    width: 100%;
+  }
+  
+  /* Estilos para el carrito de compras */
+  .carrito {
+    background-color: #f2f2f2;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 1em;
+  }
+  
+  .carrito h2 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  
+  .carrito ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .carrito li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+  }
+  
+  .carrito li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .carrito li span {
+    font-weight: bold;
+  }
+  
+  .carrito button {
+    display: block;
+    margin: 1em auto 0;
+    padding: 0.5em 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .carrito button:hover {
+    background-color: #3e8e41;
+  }
+  #img {
+    width: 350px;
+  
+   }
