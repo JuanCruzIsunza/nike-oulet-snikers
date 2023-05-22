@@ -15,6 +15,12 @@ const productos = [
   },
 ];
 
+// Cargar el carrito desde el almacenamiento (si existe)
+const carritoStorage = localStorage.getItem("carrito");
+if (carritoStorage) {
+  carrito = JSON.parse(carritoStorage);
+}
+
 // Funciones para manejar el carrito de compras
 function agregarAlCarrito(nombre, precio) {
   const producto = {
@@ -23,6 +29,7 @@ function agregarAlCarrito(nombre, precio) {
   };
   carrito.push(producto);
   actualizarCarrito();
+  guardarCarritoEnStorage();
 }
 
 function actualizarCarrito() {
@@ -43,6 +50,7 @@ function actualizarCarrito() {
 function vaciarCarrito() {
   carrito = [];
   actualizarCarrito();
+  guardarCarritoEnStorage();
 }
 
 function realizarCompra() {
@@ -60,6 +68,11 @@ function realizarCompra() {
   }
 }
 
+// Guardar el carrito en el almacenamiento
+function guardarCarritoEnStorage() {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
 // Funciones de búsqueda y filtrado
 function buscarProducto(nombre) {
   return productos.find((producto) => producto.nombre === nombre);
@@ -68,6 +81,7 @@ function buscarProducto(nombre) {
 function filtrarPorPrecio(precioMinimo, precioMaximo) {
   return productos.filter((producto) => producto.precio >= precioMinimo && producto.precio <= precioMaximo);
 }
+
 // Variables para recopilar la información del cliente
 let nombre = '';
 let apellido = '';
@@ -83,7 +97,7 @@ function recopilarInformacion() {
   telefono = document.getElementById('telefono').value;
 
   // Validar que se haya ingresado un valor para cada campo
-  if (nombre === '' || apellido === '' || correo === '' ) {
+  if (nombre === '' || apellido === '' || correo === '') {
     alert('Por favor ingrese todos los campos requeridos.');
     return false;
   }
@@ -93,4 +107,13 @@ function recopilarInformacion() {
   console.log('Nombre:', nombre);
   console.log('Apellido:', apellido);
   console.log('Correo:', correo);
+  
+  // Guardar la información del cliente en el almacenamiento
+  const cliente = {
+    nombre: nombre,
+    apellido: apellido,
+    correo: correo,
+    telefono: telefono
+  };
+  localStorage.setItem("cliente", JSON.stringify(cliente));
 }
