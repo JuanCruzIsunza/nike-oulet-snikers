@@ -16,13 +16,25 @@ const productos = [
 ];
 
 // Cargar el carrito desde el almacenamiento (si existe)
-const carritoStorage = localStorage.getItem("carrito");
-if (carritoStorage) {
-  carrito = JSON.parse(carritoStorage);
-}
+const cargarCarritoDesdeStorage = async () => {
+  try {
+    const carritoStorage = await new Promise((resolve, reject) => {
+      const carritoData = localStorage.getItem("carrito");
+      if (carritoData) {
+        resolve(JSON.parse(carritoData));
+      } else {
+        reject("No hay datos de carrito en el almacenamiento");
+      }
+    });
+
+    carrito = carritoStorage;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // Funciones para manejar el carrito de compras
-function agregarAlCarrito(nombre, precio) {
+const agregarAlCarrito = (nombre, precio) => {
   const producto = {
     nombre: nombre,
     precio: precio,
@@ -30,9 +42,9 @@ function agregarAlCarrito(nombre, precio) {
   carrito.push(producto);
   actualizarCarrito();
   guardarCarritoEnStorage();
-}
+};
 
-function actualizarCarrito() {
+const actualizarCarrito = () => {
   const carritoLista = document.getElementById("carrito-lista");
   carritoLista.innerHTML = "";
   let total = 0;
@@ -45,15 +57,15 @@ function actualizarCarrito() {
   const totalElemento = document.createElement("p");
   totalElemento.innerText = `Total: U$S ${total}`;
   carritoLista.appendChild(totalElemento);
-}
+};
 
-function vaciarCarrito() {
+const vaciarCarrito = () => {
   carrito = [];
   actualizarCarrito();
   guardarCarritoEnStorage();
-}
+};
 
-function realizarCompra() {
+const realizarCompra = () => {
   const nombre = document.getElementById("cliente-nombre").value;
   const email = document.getElementById("cliente-email").value;
   const direccion = document.getElementById("cliente-direccion").value;
@@ -66,21 +78,21 @@ function realizarCompra() {
     document.getElementById("cliente-email").value = "";
     document.getElementById("cliente-direccion").value = "";
   }
-}
+};
 
 // Guardar el carrito en el almacenamiento
-function guardarCarritoEnStorage() {
+const guardarCarritoEnStorage = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
-}
+};
 
 // Funciones de búsqueda y filtrado
-function buscarProducto(nombre) {
+const buscarProducto = (nombre) => {
   return productos.find((producto) => producto.nombre === nombre);
-}
+};
 
-function filtrarPorPrecio(precioMinimo, precioMaximo) {
+const filtrarPorPrecio = (precioMinimo, precioMaximo) => {
   return productos.filter((producto) => producto.precio >= precioMinimo && producto.precio <= precioMaximo);
-}
+};
 
 // Variables para recopilar la información del cliente
 let nombre = '';
@@ -89,7 +101,7 @@ let correo = '';
 let telefono = '';
 
 // Función para recopilar la información del cliente
-function recopilarInformacion() {
+const recopilarInformacion = () => {
   // Recopilar la información del formulario HTML
   nombre = document.getElementById('nombre').value;
   apellido = document.getElementById('apellido').value;
@@ -107,7 +119,7 @@ function recopilarInformacion() {
   console.log('Nombre:', nombre);
   console.log('Apellido:', apellido);
   console.log('Correo:', correo);
-  
+
   // Guardar la información del cliente en el almacenamiento
   const cliente = {
     nombre: nombre,
@@ -116,4 +128,53 @@ function recopilarInformacion() {
     telefono: telefono
   };
   localStorage.setItem("cliente", JSON.stringify(cliente));
-}
+};
+
+// Cargar el carrito desde el almacenamiento al iniciar
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarCarritoDesdeStorage();
+  actualizarCarrito();
+});
+
+// Código relacionado con frameworks (jQuery)
+$(document).ready(function() {
+  // Código utilizando jQuery
+});
+
+// Código relacionado con Node.js (requiere tener instalado Node.js)
+const fs = require('fs');
+
+// Código utilizando fs (sistema de archivos) de Node.js
+fs.readFile('archivo.txt', 'utf8', function(err, data) {
+  if (err) throw err;
+  console.log(data);
+});
+
+// Código relacionado con Ajax (usando jQuery)
+$.ajax({
+  url: 'https://api.example.com/data',
+  method: 'GET',
+  success: function(response) {
+    console.log(response);
+  },
+  error: function(error) {
+    console.error(error);
+  }
+});
+
+// Código relacionado con Fetch
+fetch('https://api.example.com/data')
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error('Error en la solicitud');
+    }
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
+
+
